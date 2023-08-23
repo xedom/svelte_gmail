@@ -7,20 +7,22 @@
 	import Cog from 'svelte-material-icons/Cog.svelte';
 	import Close from 'svelte-material-icons/Close.svelte';
 	import Tune from 'svelte-material-icons/Tune.svelte';
+
+	import IconButton from '$lib/components/IconButton.svelte';
 </script>
 
 <header class="z-20 flex items-center p-2 font-semibold text-gray-700">
-	<div class="mr-[148px] flex items-center">
-		<button class="ml-[2px] mr-[10px] rounded-full p-3 hover:bg-gray-300"><Menu class="h-6 w-6" /></button>
+	<div class="mr-[148px] flex items-center pl-1">
+		<IconButton><Menu class="h-6 w-6" /></IconButton>
 		<div class="px-8 font-bold">Gmail</div>
 	</div>
 
 	<div class="flex flex-1 items-center">
 		<div class="mr-8 flex flex-1 overflow-hidden rounded-full bg-slate-200">
-			<button class="m-1 rounded-full p-2 hover:bg-gray-300"><Magnify class="h-6 w-6" /></button>
+			<IconButton><Magnify class="h-6 w-6" /></IconButton>
 			<input class="h-[46px] flex-1 bg-transparent outline-none" type="text" placeholder="Cerca nella Posta" />
-			<button class="m-1 rounded-full p-2 hover:bg-gray-300"><Close class="h-6 w-6" /></button>
-			<button class="m-1 rounded-full p-2 hover:bg-gray-300"><Tune class="h-6 w-6" /></button>
+			<IconButton><Close class="h-6 w-6" /></IconButton>
+			<IconButton><Tune class="h-6 w-6" /></IconButton>
 		</div>
 		<div class="flex">
 			<button class="mr-3 flex h-[48px] items-center gap-2 rounded-full bg-slate-200 px-2 py-4">
@@ -29,8 +31,8 @@
 				<ChevronDown class="h-4 w-4" />
 			</button>
 			<div class="flex items-center">
-				<button class="m-1 rounded-full p-2 hover:bg-gray-300"><HelpCircleOutline class="h-6 w-6" /></button>
-				<button class="m-1 rounded-full p-2 hover:bg-gray-300"><Cog class="h-6 w-6" /></button>
+				<IconButton><HelpCircleOutline class="h-6 w-6" /></IconButton>
+				<IconButton><Cog class="h-6 w-6" /></IconButton>
 			</div>
 		</div>
 	</div>
