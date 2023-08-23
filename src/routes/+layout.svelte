@@ -10,7 +10,7 @@
 	<Navbar />
 	<!-- <div class="ml-[68px] overflow-hidden rounded-lg bg-black p-2"> -->
 	<div class="ml-[324px] flex flex-1 pb-2 pr-2">
-		<div class="flex-1 overflow-hidden rounded-2xl bg-white p-4">
+		<div class="flex-1 overflow-hidden rounded-2xl bg-white px-4">
 			<slot />
 		</div>
 	</div>
