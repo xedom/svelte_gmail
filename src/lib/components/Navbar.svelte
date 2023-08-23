@@ -1,14 +1,12 @@
 <script>
 	import DotsGrid from 'svelte-material-icons/DotsGrid.svelte';
-	import Magnify from 'svelte-material-icons/Magnify.svelte';
 	import ChevronDown from 'svelte-material-icons/ChevronDown.svelte';
 	import Menu from 'svelte-material-icons/Menu.svelte';
 	import HelpCircleOutline from 'svelte-material-icons/HelpCircleOutline.svelte';
 	import Cog from 'svelte-material-icons/Cog.svelte';
-	import Close from 'svelte-material-icons/Close.svelte';
-	import Tune from 'svelte-material-icons/Tune.svelte';
 
 	import IconButton from '$lib/components/IconButton.svelte';
+	import Searchbar from '$lib/components/Searchbar.svelte';
 </script>
 
 <header class="z-20 flex items-center p-2 font-semibold text-gray-700">
@@ -17,17 +15,9 @@
 		<div class="px-8 font-bold">Gmail</div>
 	</div>
 
-	<div class="flex flex-1 items-center">
-		<div class="mr-8 flex flex-1 overflow-hidden rounded-full bg-slate-200">
-			<IconButton><Magnify class="h-6 w-6" /></IconButton>
-			<input
-				class="h-[46px] min-w-min flex-1 bg-transparent outline-none"
-				type="text"
-				placeholder="Cerca nella Posta"
-			/>
-			<IconButton><Close class="h-6 w-6" /></IconButton>
-			<IconButton><Tune class="h-6 w-6" /></IconButton>
-		</div>
+	<Searchbar />
+
+	<div class="flex flex-1 items-center justify-end">
 		<div class="flex">
 			<button class="mr-3 flex h-[48px] items-center gap-2 rounded-full bg-slate-200 px-2 py-4">
 				<span class="block h-3 w-3 rounded-full bg-green-600" />
