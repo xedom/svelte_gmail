@@ -1,5 +1,4 @@
 <script>
-	console.log('hey');
 	import Reload from 'svelte-material-icons/Reload.svelte';
 	import MenuDown from 'svelte-material-icons/MenuDown.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
@@ -12,10 +11,14 @@
 	import Email from 'svelte-material-icons/EmailOutline.svelte';
 	import Clock from 'svelte-material-icons/ClockOutline.svelte';
 
+	import EmailsInbox from '$lib/components/EmailsInbox.svelte';
+
 	let selected = true;
+	export let data;
+	const { emails } = data;
 </script>
 
-<div class="flex items-stretch py-1">
+<div class="flex items-stretch px-4 py-1">
 	<div class="flex items-center">
 		<input type="checkbox" bind:checked={selected} />
 		<MenuDown />
@@ -40,5 +43,4 @@
 	</div>
 </div>
 
-<h1>Welcome to SvelteKit 2</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<EmailsInbox {emails} />

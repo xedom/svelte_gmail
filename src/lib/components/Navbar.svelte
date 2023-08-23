@@ -20,7 +20,11 @@
 	<div class="flex flex-1 items-center">
 		<div class="mr-8 flex flex-1 overflow-hidden rounded-full bg-slate-200">
 			<IconButton><Magnify class="h-6 w-6" /></IconButton>
-			<input class="h-[46px] flex-1 bg-transparent outline-none" type="text" placeholder="Cerca nella Posta" />
+			<input
+				class="h-[46px] min-w-min flex-1 bg-transparent outline-none"
+				type="text"
+				placeholder="Cerca nella Posta"
+			/>
 			<IconButton><Close class="h-6 w-6" /></IconButton>
 			<IconButton><Tune class="h-6 w-6" /></IconButton>
 		</div>
@@ -39,7 +43,6 @@
 
 	<div class="flex items-center justify-self-end">
 		<button class="m-1 rounded-full p-2 hover:bg-gray-300"><DotsGrid class="h-6 w-6" /></button>
-
 		<button class="flex h-[46px] items-center gap-2 rounded-md border-2 border-solid border-gray-300 bg-white p-1">
 			<span>Pingo Corp</span>
 			<img class="square m-1 h-8 w-8 rounded-full object-cover" src="/profile.gif" alt="profile pic" />
