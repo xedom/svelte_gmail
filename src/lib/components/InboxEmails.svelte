@@ -18,6 +18,9 @@
 			border-gray-200
 			bg-slate-100
 			p-1
+			transition
+			duration-200
+			ease-in-out
 			hover:cursor-pointer
 			hover:bg-blue-200
 			lg:grid-cols-[20px_20px_48px_320px_minmax(300px,_2fr)_50px]
