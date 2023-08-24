@@ -11,6 +11,9 @@
 	function onSelect(event, id) {
 		dispatch('message', { type: event.target.checked ? 'selected' : 'deselected', id });
 	}
+	function onStarred(event) {
+		dispatch('message', { type: 'starred', id: email.id });
+	}
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -44,7 +47,7 @@
 		}}
 		type="checkbox"
 	/>
-	<IconButton><StarOutline class="h-6 w-6" /></IconButton>
+	<IconButton on:click={onStarred}><StarOutline class="h-6 w-6" /></IconButton>
 	<div class="overflow-hidden">
 		<span class="whitespace-nowrap">{email.object}</span>
 	</div>

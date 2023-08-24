@@ -1,5 +1,5 @@
 <script>
-	import { emailStore, bulkDelete } from '$lib/store/emails';
+	import { emailStore, bulkDelete, starEmail } from '$lib/store/emails';
 	import InboxEmails from '$lib/components/InboxEmails.svelte';
 	import InboxToolbar from '$lib/components/InboxToolbar.svelte';
 
@@ -13,10 +13,14 @@
 		selectedEmails = [];
 	};
 
+	const onStarred = (id) => {
+		starEmail(id);
+	};
+
 	function handleInboxEvents(event) {
 		const detail = event.detail;
 		if (!detail || !detail.id || !detail.type) return;
-		if (detail.type == 'starred') return;
+		if (detail.type == 'starred') return onStarred(detail.id);
 		if (detail.type == 'unstar') return;
 		if (detail.type == 'delete') return;
 		if (detail.type == 'selected') return onSelect(detail.id);

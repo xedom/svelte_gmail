@@ -38,6 +38,15 @@ export const bulkDelete = (ids) => {
 	});
 }
 
+export const starEmail = (id) => {
+	console.log(id);
+	const starredEmail = get(emailStore).emails.find((email) => email.id === id);
+	if (starredEmail) {
+		starredEmail.tag = [...starredEmail.tag, "starred"];
+		emailStore.update((store) => ({...store, starred: [...store.starred, starredEmail]}));
+	}
+}
+
 export const sendEmail = (object, body) => {
 	const email = {
 		id: Math.random().toString(36).substr(2, 9),
