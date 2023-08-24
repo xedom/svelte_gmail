@@ -14,19 +14,32 @@ export const emailStore = writable({
 	emails: [],
 	filtered: [],
 	drafts: [],
+	starred: [],
+	sent: [],
 	search: "",
 });
 
 export const createDraft = (object, body) => {
 	const email = {
 		id: Math.random().toString(36).substr(2, 9),
-    object: product.title,
-    body: product.description,
+    object, body,
     tag: ["draft"],
     date: parseDate(dayjs()),
   };
 
 	emailStore.update((store) => ({...store, drafts: [...store.drafts, email]}));
+	return email;
+}
+
+export const sendEmail = (object, body) => {
+	const email = {
+		id: Math.random().toString(36).substr(2, 9),
+    object, body,
+    tag: ["draft"],
+    date: parseDate(dayjs()),
+  };
+
+	emailStore.update((store) => ({...store, sent: [...store.sent, email]}));
 	return email;
 }
 

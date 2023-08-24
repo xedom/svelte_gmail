@@ -7,6 +7,7 @@
 	import Tag from 'svelte-material-icons/Tag.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import { goto } from '$app/navigation';
+	import { emailStore } from '$lib/store/emails';
 
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
@@ -30,28 +31,28 @@
 				goto('/');
 			}}
 			label="Inbox"
-			count="420"><StarOutline /></Button
+			count={$emailStore.emails.length}><StarOutline /></Button
 		>
 		<Button
 			on:click={() => {
 				goto('/starred');
 			}}
 			label="Starred"
-			count="420"><Email /></Button
+			count={$emailStore.starred.length}><Email /></Button
 		>
 		<Button
 			on:click={() => {
 				goto('/sent');
 			}}
 			label="Sent"
-			count="420"><Send /></Button
+			count={$emailStore.sent.length}><Send /></Button
 		>
 		<Button
 			on:click={() => {
 				goto('/drafts');
 			}}
 			label="Drafts"
-			count="420"><File /></Button
+			count={$emailStore.drafts.length}><File /></Button
 		>
 	</div>
 
