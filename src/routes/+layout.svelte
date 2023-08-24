@@ -1,5 +1,4 @@
 <script>
-	import './styles.css';
 	import '../app.postcss';
 	import Navbar from '../lib/components/Navbar.svelte';
 	import Sidebar from '../lib/components/Sidebar.svelte';
