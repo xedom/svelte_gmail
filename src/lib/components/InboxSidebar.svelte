@@ -6,6 +6,7 @@
 	import Pen from 'svelte-material-icons/Pen.svelte';
 	import Tag from 'svelte-material-icons/Tag.svelte';
 	import Button from '$lib/components/Button.svelte';
+	import { goto } from '$app/navigation';
 </script>
 
 <div class="flex flex-col gap-3 p-2">
@@ -17,10 +18,34 @@
 	</div>
 
 	<div class="flex flex-col gap-1">
-		<Button label="Inbox" count="420"><StarOutline /></Button>
-		<Button label="Starred" count="420"><Email /></Button>
-		<Button label="Sent" count="420"><Send /></Button>
-		<Button label="Drafts" count="420"><File /></Button>
+		<Button
+			on:click={() => {
+				goto('/');
+			}}
+			label="Inbox"
+			count="420"><StarOutline /></Button
+		>
+		<Button
+			on:click={() => {
+				goto('/starred');
+			}}
+			label="Starred"
+			count="420"><Email /></Button
+		>
+		<Button
+			on:click={() => {
+				goto('/sent');
+			}}
+			label="Sent"
+			count="420"><Send /></Button
+		>
+		<Button
+			on:click={() => {
+				goto('/drafts');
+			}}
+			label="Drafts"
+			count="420"><File /></Button
+		>
 	</div>
 
 	<div>

@@ -5,11 +5,7 @@
 	import InboxSidebar from '../lib/components/InboxSidebar.svelte';
 
 	let collapseInboxSideBar = false;
-
-	const toggleCollapse = () => {
-		console.log('collapse triggered');
-		collapseInboxSideBar = !collapseInboxSideBar;
-	};
+	const toggleCollapse = () => (collapseInboxSideBar = !collapseInboxSideBar);
 
 	function handleMessage(event) {
 		const eventType = event.detail?.type;
