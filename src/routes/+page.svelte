@@ -6,6 +6,6 @@
 	const { emails } = data;
 </script>
 
-<InboxToolbar />
+<InboxToolbar {emails} />
 
 <InboxEmails {emails} />

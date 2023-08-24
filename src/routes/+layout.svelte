@@ -15,7 +15,6 @@
 
 	<Navbar />
 
-	<!-- <div class="ml-[324px] flex flex-1 pb-2 pr-2"> -->
 	<div class="z-10 flex flex-1 pb-2 pr-2">
 		<div class="flex h-full w-[68px] flex-col items-center gap-1">
 			<Sidebar />
