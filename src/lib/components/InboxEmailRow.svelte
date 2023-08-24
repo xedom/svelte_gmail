@@ -2,9 +2,15 @@
 	import Drag from 'svelte-material-icons/Drag.svelte';
 	import StarOutline from 'svelte-material-icons/StarOutline.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	export let email;
 	let isHoverning = false;
+
+	const dispatch = createEventDispatcher();
+	function onSelect(event, id) {
+		dispatch('message', { type: event.target.checked ? 'selected' : 'deselected', id });
+	}
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -32,7 +38,12 @@
 			<Drag />
 		{/if}
 	</div>
-	<input type="checkbox" />
+	<input
+		on:change={(event) => {
+			onSelect(event, email.id);
+		}}
+		type="checkbox"
+	/>
 	<IconButton><StarOutline class="h-6 w-6" /></IconButton>
 	<div class="overflow-hidden">
 		<span class="whitespace-nowrap">{email.object}</span>

@@ -12,7 +12,7 @@
 		if (eventType && eventType == 'collapse') toggleCollapse();
 	}
 
-	let collapseDraftModal = true;
+	let collapseDraftModal = false;
 	const toggleDraftModal = () => (collapseDraftModal = !collapseDraftModal);
 	function handleDraftMessage(event) {
 		const eventType = event.detail?.type;

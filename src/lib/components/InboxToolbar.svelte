@@ -10,20 +10,27 @@
 	import AlertOctagram from 'svelte-material-icons/AlertOctagramOutline.svelte';
 	import Email from 'svelte-material-icons/EmailOutline.svelte';
 	import Clock from 'svelte-material-icons/ClockOutline.svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	let selected = true;
+	export let selectedEmails = [];
+
+	const dispatch = createEventDispatcher();
+	function onDelete() {
+		dispatch('message', { type: 'delete' });
+	}
 </script>
 
 <div class="flex items-stretch px-4 py-1">
 	<div class="flex items-center">
-		<input type="checkbox" bind:checked={selected} />
+		<input type="checkbox" checked={selectedEmails.length !== 0} />
 		<MenuDown />
 	</div>
 	<div class="flex flex-1 items-center">
 		{#if selected}
 			<IconButton><PackageDown /></IconButton>
 			<IconButton><AlertOctagram /></IconButton>
-			<IconButton><TrashCan /></IconButton>
+			<IconButton on:click={onDelete}><TrashCan /></IconButton>
 			|
 			<IconButton><Email /></IconButton>
 			<IconButton><Clock /></IconButton>

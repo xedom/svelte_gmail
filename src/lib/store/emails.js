@@ -31,6 +31,13 @@ export const createDraft = (object, body) => {
 	return email;
 }
 
+export const bulkDelete = (ids) => {
+	emailStore.update((store) => {
+		store.emails = store.emails.filter((email) => !ids.includes(email.id))
+		return store;
+	});
+}
+
 export const sendEmail = (object, body) => {
 	const email = {
 		id: Math.random().toString(36).substr(2, 9),
