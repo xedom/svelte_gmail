@@ -17,7 +17,7 @@ const parseDate = (dayjs_date) => {
 }
 
 export const load = async ({ paramsm, fetch }) => {
-  const res = await fetch('https://dummyjson.com/products?limit=50&skip=0');
+  const res = await fetch('https://dummyjson.com/products?limit=25&skip=0');
   const data = await res.json();
   const emails = data.products.map(product => ({
     object: product.title,
