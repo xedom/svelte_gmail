@@ -6,18 +6,26 @@
 	import InboxSidebar from '../lib/components/InboxSidebar.svelte';
 
 	let collapseInboxSideBar = false;
-	const toggleCollapse = () => (collapseInboxSideBar = !collapseInboxSideBar);
+
+	const toggleCollapse = () => {
+		console.log('collapse triggered');
+		collapseInboxSideBar = !collapseInboxSideBar;
+	};
+
+	function handleMessage(event) {
+		const eventType = event.detail?.type;
+		if (eventType && eventType == 'collapse') toggleCollapse();
+	}
 </script>
 
 <div class="flex h-screen flex-col bg-gray-100">
 	<div class="absolute top-0 flex h-full w-[4.25rem] flex-col items-center gap-1 bg-slate-200 pt-16"></div>
 
-	<Navbar />
+	<Navbar on:message={handleMessage} />
 
 	<div class="z-10 flex flex-1 pb-2 pr-2">
 		<div class="flex h-full w-[4.25rem] flex-col items-center gap-1">
 			<Sidebar />
-			<button on:click={toggleCollapse}>collapse</button>
 		</div>
 
 		<div

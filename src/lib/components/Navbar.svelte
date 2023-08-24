@@ -7,11 +7,18 @@
 
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Searchbar from '$lib/components/Searchbar.svelte';
+
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+	function onCollapse() {
+		dispatch('message', { type: 'collapse' });
+	}
 </script>
 
 <header class="z-20 flex items-center p-2 font-semibold text-gray-700">
 	<div class="mr-[9.25rem] flex items-center pl-1">
-		<IconButton><Menu class="h-6 w-6" /></IconButton>
+		<IconButton on:click={onCollapse}><Menu class="h-6 w-6" /></IconButton>
 		<div class="px-8 font-bold">Gmail</div>
 	</div>
 
