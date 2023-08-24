@@ -1,4 +1,7 @@
 <script>
+	import { emailStore, handleSearch } from '$lib/store/emails';
+	import { onDestroy } from 'svelte';
+
 	import DotsGrid from 'svelte-material-icons/DotsGrid.svelte';
 	import ChevronDown from 'svelte-material-icons/ChevronDown.svelte';
 	import Menu from 'svelte-material-icons/Menu.svelte';
@@ -14,6 +17,11 @@
 	function onCollapse() {
 		dispatch('message', { type: 'collapse' });
 	}
+
+	const unsubcriveEmailStore = emailStore.subscribe(handleSearch);
+	onDestroy(() => {
+		unsubcriveEmailStore();
+	});
 </script>
 
 <header class="z-20 flex items-center p-2 font-semibold text-gray-700">
@@ -22,7 +30,7 @@
 		<div class="px-8 font-bold">Gmail</div>
 	</div>
 
-	<Searchbar />
+	<Searchbar bind:input={$emailStore.search} />
 
 	<div class="flex flex-1 items-center justify-end">
 		<div class="flex">

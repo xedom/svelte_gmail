@@ -9,7 +9,21 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-	class="grid grid-cols-1 items-center border-b-2 border-gray-200 bg-slate-100 px-1 transition duration-200 ease-in-out hover:cursor-pointer hover:bg-blue-200 lg:grid-cols-[1.25rem_1.25rem_3rem_20rem_minmax(18.75rem,_2fr)_3.2rem]"
+	class="
+		grid
+		grid-cols-1
+		items-center
+		border-b-2
+		border-gray-200
+		bg-slate-100
+		px-1
+		transition
+		duration-200
+		ease-in-out
+		hover:cursor-pointer
+		hover:bg-blue-200
+		lg:grid-cols-[1.25rem_1.25rem_3rem_20rem_minmax(18.75rem,_2fr)_8rem]
+	"
 	on:mouseenter={() => (isHoverning = true)}
 	on:mouseleave={() => (isHoverning = false)}
 >
@@ -26,7 +40,7 @@
 	<div class="flex overflow-hidden">
 		<span class="whitespace-nowrap">{email.body.slice(0, 50)}...</span>
 	</div>
-	<div class="flex justify-center overflow-hidden">
-		<span class="text-sm text-gray-600">{email.timestamp}</span>
+	<div class="flex justify-end overflow-hidden">
+		<span class="text-sm text-gray-600">{email.date}</span>
 	</div>
 </div>

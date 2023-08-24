@@ -5,21 +5,21 @@
 
 	import IconButton from '$lib/components/IconButton.svelte';
 
-	let inputValue = '';
+	export let input = '';
 </script>
 
 <div class="mr-8 flex flex-1 overflow-hidden rounded-full bg-slate-200">
 	<IconButton><Magnify class="h-6 w-6" /></IconButton>
 	<input
-		bind:value={inputValue}
+		bind:value={input}
 		class="h-[2.875] min-w-min flex-1 bg-transparent outline-none"
 		type="text"
 		placeholder="Cerca nella Posta"
 	/>
-	{#if inputValue !== ''}
+	{#if input !== ''}
 		<IconButton
 			on:click={() => {
-				inputValue = '';
+				input = '';
 			}}><Close class="h-6 w-6" /></IconButton
 		>
 	{/if}
