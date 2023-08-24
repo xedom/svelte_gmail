@@ -7,8 +7,9 @@
 	let isHoverning = false;
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-	class="grid grid-cols-1 items-center border-b-2 border-gray-200 bg-slate-100 px-1 transition duration-200 ease-in-out hover:cursor-pointer hover:bg-blue-200 lg:grid-cols-[20px_20px_48px_320px_minmax(300px,_2fr)_50px]"
+	class="grid grid-cols-1 items-center border-b-2 border-gray-200 bg-slate-100 px-1 transition duration-200 ease-in-out hover:cursor-pointer hover:bg-blue-200 lg:grid-cols-[1.25rem_1.25rem_3rem_20rem_minmax(18.75rem,_2fr)_3.2rem]"
 	on:mouseenter={() => (isHoverning = true)}
 	on:mouseleave={() => (isHoverning = false)}
 >

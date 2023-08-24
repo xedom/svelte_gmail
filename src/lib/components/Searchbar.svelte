@@ -12,7 +12,7 @@
 	<IconButton><Magnify class="h-6 w-6" /></IconButton>
 	<input
 		bind:value={inputValue}
-		class="h-[46px] min-w-min flex-1 bg-transparent outline-none"
+		class="h-[2.875] min-w-min flex-1 bg-transparent outline-none"
 		type="text"
 		placeholder="Cerca nella Posta"
 	/>
