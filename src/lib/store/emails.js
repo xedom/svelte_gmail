@@ -1,5 +1,7 @@
 import { writable, get } from 'svelte/store';
 import { browser } from '$app/environment';
+import dayjs from 'dayjs';
+import { parseDate } from '$lib/utils';
 // if (!browser) return store;
 
 const getLocalStorage = (key) => {
@@ -11,8 +13,22 @@ const getLocalStorage = (key) => {
 export const emailStore = writable({
 	emails: [],
 	filtered: [],
+	drafts: [],
 	search: "",
 });
+
+export const createDraft = (object, body) => {
+	const email = {
+		id: Math.random().toString(36).substr(2, 9),
+    object: product.title,
+    body: product.description,
+    tag: ["draft"],
+    date: parseDate(dayjs()),
+  };
+
+	emailStore.update((store) => ({...store, drafts: [...store.drafts, email]}));
+	return email;
+}
 
 export const addEmails = (emails) => {
 	emailStore.update((store) => { 

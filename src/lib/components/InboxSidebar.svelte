@@ -7,15 +7,22 @@
 	import Tag from 'svelte-material-icons/Tag.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import { goto } from '$app/navigation';
+
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+	function onCollapse() {
+		dispatch('message', { type: 'close-draft' });
+	}
 </script>
 
 <div class="flex flex-col gap-3 p-2">
-	<div
+	<button
+		on:click={onCollapse}
 		class="flex cursor-pointer items-center gap-2 self-auto rounded-lg bg-blue-200 p-4 transition-all hover:bg-blue-300"
 	>
 		<Pen />
 		<span>Compose</span>
-	</div>
+	</button>
 
 	<div class="flex flex-col gap-1">
 		<Button
