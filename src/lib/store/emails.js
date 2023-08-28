@@ -27,19 +27,15 @@ export const emailStore = writable({
 });
 
 emailStore.subscribe((value) => {
-	setLocalStorage("emails", value.emails);
+	if (value.emails.length !== 0) setLocalStorage("emails", value.emails);
 });
 
 export const moveOnTop = (id_to_move, id_where_to_move) => {
 	const currentEmails = get(emailStore).emails;
-	console.log('moveOnTop|currentEmails:', currentEmails);
 	const indexOfEmailToMove = currentEmails.findIndex((email) => email.id === id_to_move);
 	const indexOfEmailWhereToMove = currentEmails.findIndex((email) => email.id === id_where_to_move);
 	const emailToMove = currentEmails.splice(indexOfEmailToMove, 1)[0];
-	console.log('moveOnTop|emailToMove:', emailToMove);
-	console.log('moveOnTop:', indexOfEmailToMove, 'on', indexOfEmailWhereToMove);
 	currentEmails.splice(indexOfEmailWhereToMove, 0, emailToMove);
-	console.log('moveOnTop|currentEmails:', currentEmails);
 
 	emailStore.update((store) => ({
 		...store,

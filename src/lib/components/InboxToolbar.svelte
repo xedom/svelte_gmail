@@ -15,6 +15,7 @@
 	$: selected = selectedEmails.length !== 0;
 	export let selectedEmails = [];
 	export let emailCount = 0;
+	export let showCheckbox = true;
 
 	const dispatch = createEventDispatcher();
 	function onDelete() {
@@ -32,11 +33,13 @@
 
 <div class="flex items-stretch px-4 py-1">
 	<div class="flex items-center pl-2">
-		<input type="checkbox" checked={selectedEmails.length !== 0} on:change={onCheckboxChange} />
+		{#if showCheckbox}
+			<input type="checkbox" checked={selectedEmails.length !== 0} on:change={onCheckboxChange} />
+		{/if}
 		<!-- <MenuDown /> -->
 	</div>
 	<div class="flex flex-1 items-center">
-		{#if selected}
+		{#if selected || !showCheckbox}
 			<IconButton><PackageDown /></IconButton>
 			<IconButton><AlertOctagram /></IconButton>
 			<IconButton on:click={onDelete}><TrashCan /></IconButton>

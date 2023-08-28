@@ -10,10 +10,7 @@ export const load = async ({ paramsm, fetch }) => {
 
   let emails = getLocalStorage('emails');
 
-  console.log('emails', emails);
-  console.log('emails', emails?.length);
   if (!emails || emails.length === 0) {
-    console.log('fetching emails');
     const res = await fetch('https://dummyjson.com/products?limit=80&skip=0');
     const data = await res.json();
     emails = data.products.map(product => {

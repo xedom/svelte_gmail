@@ -51,7 +51,7 @@
 		<button
 			class="flex h-[2.875rem] items-center gap-2 rounded-md border-2 border-solid border-gray-300 bg-white p-1"
 		>
-			<span>Pingo Corp</span>
+			<span>Pingu Corp</span>
 			<img class="square m-1 h-8 w-8 rounded-full object-cover" src="/profile.gif" alt="profile pic" />
 		</button>
 	</div>

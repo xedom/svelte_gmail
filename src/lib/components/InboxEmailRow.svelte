@@ -20,12 +20,10 @@
 
 	function onDrag(event) {
 		event.dataTransfer.setData('text/plain', email.id);
-		console.log('dragging', email.id);
 	}
 	function onDrop(event) {
 		event.preventDefault();
 		const id = event.dataTransfer.getData('text/plain');
-		console.log('dropped:', id, 'on', email.id);
 		moveOnTop(id, email.id);
 	}
 	function onDragover(event) {
@@ -34,9 +32,8 @@
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div
-	on:dragenter
-	on:drag
+<a
+	href={'/email/' + email.id}
 	on:drop={onDrop}
 	on:dragover={onDragover}
 	on:dragstart={onDrag}
@@ -87,4 +84,4 @@
 	<div class="flex justify-end overflow-hidden">
 		<span class="text-sm text-gray-600">{email.date}</span>
 	</div>
-</div>
+</a>
