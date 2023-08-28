@@ -34,7 +34,9 @@
 		if (detail.type == 'delete') return onBulkDelete();
 	}
 
-	$: emailsSorted = $emailStore.drafts.sort((a, b) => b.timestamp - a.timestamp);
+	$: emailsSorted = $emailStore.emails
+		.filter((e) => e.tags.includes('draft'))
+		.sort((a, b) => b.timestamp - a.timestamp);
 	$: emailCount = emailsSorted.reduce((a, e) => (a += 1), 0);
 </script>
 

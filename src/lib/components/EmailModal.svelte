@@ -13,7 +13,7 @@
 
 	function saveDraft() {
 		if (emailObject.trim() == '' || emailMessage.trim() == '') return;
-		addDraftEmail(emailObject, emailMessage);
+		addDraftEmail(emailObject, emailMessage, attachements);
 		onClear();
 	}
 	function onSave() {
@@ -27,6 +27,7 @@
 		emailTo = '';
 		emailObject = '';
 		emailMessage = '';
+		attachements = [];
 	}
 
 	function onDrop(ev) {

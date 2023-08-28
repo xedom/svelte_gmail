@@ -20,6 +20,7 @@ export const load = async ({ paramsm, fetch }) => {
         object: product.title,
         body: product.description,
         tags: [getRandomTag()],
+        attachements: [],
         timestamp: dayjs(timestamp).valueOf(),
         date: parseDate(timestamp),
       }

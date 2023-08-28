@@ -47,16 +47,17 @@ export const moveOnTop = (id_to_move, id_where_to_move) => {
 	}));
 }
 
-export const addDraftEmail = (object, body) => {
+export const addDraftEmail = (object, body, attachements) => {
 	const email = {
 		id: Math.random().toString(36).substr(2, 9),
     object, body,
     tags: ["draft"],
     timestamp: dayjs().valueOf(),
+		attachements,
     date: parseDate(dayjs()),
   };
-
-	emailStore.update((store) => ({...store, drafts: [...store.drafts, email]}));
+	console.log(email);
+	emailStore.update((store) => ({...store, emails: [...store.emails, email]}));
 	return email;
 }
 
@@ -102,12 +103,13 @@ export const removeStarredEmail = (id) => {
 	}));
 }
 
-export const addSentEmail = (object, body) => {
+export const addSentEmail = (object, body, attachements) => {
 	const email = {
 		id: Math.random().toString(36).substr(2, 9),
     object, body,
     tags: ["sent"],
 		timestamp: dayjs().valueOf(),
+		attachements,
     date: parseDate(dayjs()),
   };
 

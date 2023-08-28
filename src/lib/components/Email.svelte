@@ -1,17 +1,23 @@
 <script>
 	export let email;
-	let attachments = [
-		{
-			type: 'pdf',
-			title: 'CV-2023',
-			source: 'https://xed.im/random/AdmirableFreeAfricanjacana-mobile.mp4',
-		},
-		{
-			type: 'mp4',
-			title: 'interview',
-			source: 'https://xed.im/random/rick_roll.mp4',
-		},
-	];
+	// let attachments = [
+	// 	{
+	// 		type: 'pdf',
+	// 		title: 'CV-2023',
+	// 		source: 'https://xed.im/random/AdmirableFreeAfricanjacana-mobile.mp4',
+	// 	},
+	// 	{
+	// 		type: 'mp4',
+	// 		title: 'interview',
+	// 		source: 'https://xed.im/random/rick_roll.mp4',
+	// 	},
+	// ];
+
+	let attachments = email.attachements.map((a) => ({
+		type: a.split('.')[1],
+		title: a.split('.')[0],
+		source: 'https://xed.im/random/AdmirableFreeAfricanjacana-mobile.mp4',
+	}));
 
 	console.log('email', email);
 </script>
