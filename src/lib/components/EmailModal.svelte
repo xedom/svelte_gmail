@@ -1,6 +1,6 @@
 <script>
 	import Close from 'svelte-material-icons/Close.svelte';
-	import { createDraft, sendEmail } from '$lib/store/emails';
+	import { addDraftEmail, addSentEmail } from '$lib/store/emails';
 	import { createEventDispatcher } from 'svelte';
 
 	export let show = false;
@@ -11,12 +11,12 @@
 
 	function saveDraft() {
 		if (emailObject.trim() == '' || emailMessage.trim() == '') return;
-		createDraft(emailObject, emailMessage);
+		addDraftEmail(emailObject, emailMessage);
 		onClear();
 	}
 	function onSave() {
 		if (emailObject.trim() == '' || emailMessage.trim() == '') return;
-		sendEmail(emailObject, emailMessage);
+		addSentEmail(emailObject, emailMessage);
 		onClear();
 		dispatch('message', { type: 'close-draft' });
 	}
@@ -35,7 +35,7 @@
 </script>
 
 {#if show}
-	<div class="absolute bottom-0 right-40 z-50 w-[30rem] overflow-hidden rounded-lg bg-white">
+	<div class="absolute bottom-0 right-40 z-50 w-[30rem] overflow-hidden rounded-lg bg-white drop-shadow-xl">
 		<div class="flex bg-slate-300 px-3 py-1">
 			<div class="flex-1">New Email</div>
 			<button on:click={onModalClose} class="cursor-pointer p-1 hover:bg-slate-200"><Close /></button>

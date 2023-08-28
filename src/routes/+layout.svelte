@@ -26,8 +26,8 @@
 	<EmailModal on:message={handleDraftMessage} bind:show={collapseDraftModal} />
 	<Navbar on:message={handleMessage} />
 
-	<div class="z-10 flex flex-1 pb-2 pr-2">
-		<div class="flex h-full w-[4.25rem] flex-col items-center gap-1">
+	<div class="z-10 flex h-3 flex-grow pb-2 pr-2">
+		<div class="flex h-full min-w-[4.25rem] flex-col items-center gap-1">
 			<Sidebar />
 		</div>
 
@@ -39,7 +39,7 @@
 			<InboxSidebar on:message={handleDraftMessage} />
 		</div>
 
-		<div class="flex-1 overflow-hidden rounded-2xl bg-white">
+		<div class="flex h-full flex-1 flex-col rounded-2xl bg-white">
 			<slot />
 		</div>
 	</div>

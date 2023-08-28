@@ -22,9 +22,9 @@
 </script>
 
 <div class="flex items-stretch px-4 py-1">
-	<div class="flex items-center">
+	<div class="flex items-center pl-2">
 		<input type="checkbox" checked={selectedEmails.length !== 0} />
-		<MenuDown />
+		<!-- <MenuDown /> -->
 	</div>
 	<div class="flex flex-1 items-center">
 		{#if selected}

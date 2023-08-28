@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/stores';
 	import StarOutline from 'svelte-material-icons/StarOutline.svelte';
 	import Email from 'svelte-material-icons/Email.svelte';
 	import Send from 'svelte-material-icons/Send.svelte';
@@ -25,38 +26,52 @@
 		<span>Compose</span>
 	</button>
 
+	<!-- class:bg-blue-300={true || $page.route.id === '/compose'} -->
 	<div class="flex flex-col gap-1">
-		<Button
-			on:click={() => {
-				goto('/');
-			}}
-			label="Inbox"
-			count={$emailStore.emails.length}><StarOutline /></Button
-		>
-		<Button
-			on:click={() => {
-				goto('/starred');
-			}}
-			label="Starred"
-			count={$emailStore.starred.length}><Email /></Button
-		>
-		<Button
-			on:click={() => {
-				goto('/sent');
-			}}
-			label="Sent"
-			count={$emailStore.sent.length}><Send /></Button
-		>
-		<Button
-			on:click={() => {
-				goto('/drafts');
-			}}
-			label="Drafts"
-			count={$emailStore.drafts.length}><File /></Button
-		>
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<div class="flex flex-col gap-1 rounded-full" class:bg-blue-200={$page.route.id === '/'}>
+			<Button
+				on:click={() => {
+					goto('/');
+				}}
+				label="Inbox"
+				count={$emailStore.filtered.length}><StarOutline /></Button
+			>
+		</div>
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<div class="flex flex-col gap-1 rounded-full" class:bg-blue-200={$page.route.id === '/starred'}>
+			<Button
+				on:click={() => {
+					goto('/starred');
+				}}
+				label="Starred"
+				count={$emailStore.starred.length}><Email /></Button
+			>
+		</div>
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<div class="flex flex-col gap-1 rounded-full" class:bg-blue-200={$page.route.id === '/sent'}>
+			<Button
+				on:click={() => {
+					goto('/sent');
+				}}
+				label="Sent"
+				count={$emailStore.sent.length}><Send /></Button
+			>
+		</div>
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<div class="flex flex-col gap-1 rounded-full" class:bg-blue-200={$page.route.id === '/drafts'}>
+			<Button
+				on:click={() => {
+					goto('/drafts');
+				}}
+				label="Drafts"
+				count={$emailStore.drafts.length}><File /></Button
+			>
+		</div>
 	</div>
 
-	<div>
+	<!-- <div>
 		<div>Labels</div>
 	</div>
 
@@ -65,5 +80,5 @@
 		<Button label="Starred" count="420"><Tag /></Button>
 		<Button label="Sent" count="420"><Tag /></Button>
 		<Button label="Drafts" count="420"><Tag /></Button>
-	</div>
+	</div> -->
 </div>
