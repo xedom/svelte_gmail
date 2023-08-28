@@ -5,6 +5,8 @@
 
 	export let show = false;
 
+	$: attachements = [];
+
 	let emailTo = '';
 	let emailObject = '';
 	let emailMessage = '';
@@ -25,6 +27,19 @@
 		emailTo = '';
 		emailObject = '';
 		emailMessage = '';
+	}
+
+	function onDrop(ev) {
+		ev.preventDefault();
+		const item = ev.dataTransfer.items || ev.dataTransfer.files;
+		[...item].forEach((item, i) => {
+			if (item.kind === 'file') {
+				let fileName = item.name;
+				fileName = item.name || item.getAsFile().name;
+				attachements = [...attachements, fileName];
+				// console.log('file', fileName);
+			}
+		});
 	}
 
 	const dispatch = createEventDispatcher();
@@ -55,6 +70,10 @@
 			/>
 			<!-- <label for="">message</label> -->
 			<textarea
+				on:dragover={(e) => {
+					e.preventDefault();
+				}}
+				on:drop={onDrop}
 				bind:value={emailMessage}
 				class="resize-none px-3 py-2 outline-none"
 				name=""
@@ -62,6 +81,11 @@
 				cols="30"
 				rows="10"
 			></textarea>
+			{#each attachements as attachment}
+				<div class="mx-2 inline-block rounded-lg border-2 border-dashed border-stone-600 px-1 text-sm">
+					{attachment}
+				</div>
+			{/each}
 		</div>
 		<div class="flex justify-end gap-2 px-3 py-2">
 			<button on:click={onSave} class="rounded-full bg-blue-500 px-5 py-1 text-white">Send</button>

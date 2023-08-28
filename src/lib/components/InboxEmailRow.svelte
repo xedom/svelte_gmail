@@ -32,8 +32,7 @@
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<a
-	href={'/email/' + email.id}
+<div
 	on:drop={onDrop}
 	on:dragover={onDragover}
 	on:dragstart={onDrag}
@@ -73,15 +72,15 @@
 			<StarOutline />
 		{/if}
 	</IconButton>
-	<div class="flex flex-1 flex-col flex-wrap lg:flex-row">
+	<a href={'/email/' + email.id} class="flex flex-1 flex-col flex-wrap lg:flex-row">
 		<div class="w-64 overflow-hidden">
 			<span class="whitespace-nowrap font-medium">{email.object}</span>
 		</div>
 		<div class="flex-1 overflow-hidden">
 			<span class="whitespace-nowrap font-light lg:pl-2">{email.body.slice(0, 50)}...</span>
 		</div>
-	</div>
+	</a>
 	<div class="flex justify-end overflow-hidden">
 		<span class="text-sm text-gray-600">{email.date}</span>
 	</div>
-</a>
+</div>
