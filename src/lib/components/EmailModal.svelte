@@ -18,7 +18,7 @@
 	}
 	function onSave() {
 		if (emailObject.trim() == '' || emailMessage.trim() == '') return;
-		addSentEmail(emailObject, emailMessage);
+		addSentEmail(emailObject, emailMessage, attachements);
 		onClear();
 		dispatch('message', { type: 'close-draft' });
 	}
