@@ -32,10 +32,13 @@
 		const detail = event.detail;
 		if (!detail || !detail.type) return;
 		if (detail.type == 'delete') return onBulkDelete();
+		if (detail.type == 'select-all') selectedEmails = $emailStore.filtered.map((email) => email.id);
+		if (detail.type == 'unselect-all') selectedEmails = [];
 	}
 
 	$: emailsSorted = $emailStore.filtered.sort((a, b) => b.timestamp - a.timestamp);
+	$: emailCount = emailsSorted.reduce((a, e) => (a += 1), 0);
 </script>
 
-<InboxToolbar on:message={handleToolboxEvents} bind:selectedEmails />
+<InboxToolbar on:message={handleToolboxEvents} bind:selectedEmails bind:emailCount />
 <InboxEmails emails={emailsSorted} on:message={handleInboxEvents} bind:selectedEmails />

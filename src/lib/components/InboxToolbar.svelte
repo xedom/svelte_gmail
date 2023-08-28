@@ -12,18 +12,27 @@
 	import Clock from 'svelte-material-icons/ClockOutline.svelte';
 	import { createEventDispatcher } from 'svelte';
 
-	let selected = true;
+	$: selected = selectedEmails.length !== 0;
 	export let selectedEmails = [];
+	export let emailCount = 0;
 
 	const dispatch = createEventDispatcher();
 	function onDelete() {
 		dispatch('message', { type: 'delete' });
 	}
+
+	function onCheckboxChange(e) {
+		if (e.target.checked) {
+			dispatch('message', { type: 'select-all' });
+		} else {
+			dispatch('message', { type: 'unselect-all' });
+		}
+	}
 </script>
 
 <div class="flex items-stretch px-4 py-1">
 	<div class="flex items-center pl-2">
-		<input type="checkbox" checked={selectedEmails.length !== 0} />
+		<input type="checkbox" checked={selectedEmails.length !== 0} on:change={onCheckboxChange} />
 		<!-- <MenuDown /> -->
 	</div>
 	<div class="flex flex-1 items-center">
@@ -40,7 +49,7 @@
 		<IconButton><DotsVertical /></IconButton>
 	</div>
 	<div class="flex">
-		<button class="rounded-md px-5 text-xs hover:bg-gray-300">1-6 di 6</button>
+		<button class="rounded-md px-5 text-xs hover:bg-gray-300">1-{emailCount} di {emailCount}</button>
 		<IconButton><ChevronLeft /></IconButton>
 		<IconButton><ChevronRight /></IconButton>
 	</div>
