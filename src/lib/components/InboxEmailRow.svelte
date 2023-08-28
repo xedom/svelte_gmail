@@ -1,8 +1,10 @@
 <script>
 	import Drag from 'svelte-material-icons/Drag.svelte';
 	import StarOutline from 'svelte-material-icons/StarOutline.svelte';
+	import Star from 'svelte-material-icons/Star.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import { moveOnTop } from '$lib/store/emails';
 
 	export let email;
 	let isHoverning = false;
@@ -12,16 +14,37 @@
 		dispatch('message', { type: event.target.checked ? 'selected' : 'deselected', id });
 	}
 	function onStarred(event) {
-		dispatch('message', { type: 'starred', id: email.id });
+		if (email.tags.includes('starred')) return dispatch('message', { type: 'unstar', id: email.id });
+		else return dispatch('message', { type: 'starred', id: email.id });
+	}
+
+	function onDrag(event) {
+		event.dataTransfer.setData('text/plain', email.id);
+		console.log('dragging', email.id);
+	}
+	function onDrop(event) {
+		event.preventDefault();
+		const id = event.dataTransfer.getData('text/plain');
+		console.log('dropped:', id, 'on', email.id);
+		moveOnTop(id, email.id);
+	}
+	function onDragover(event) {
+		event.preventDefault();
 	}
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
+	on:dragenter
+	on:drag
+	on:drop={onDrop}
+	on:dragover={onDragover}
+	on:dragstart={onDrag}
+	draggable="true"
 	class="
-		grid
-		grid-cols-1
-		items-center
+		flex
+		flex-row
+		items-baseline
 		border-b-2
 		border-gray-200
 		bg-slate-100
@@ -31,12 +54,11 @@
 		ease-in-out
 		hover:cursor-pointer
 		hover:bg-blue-200
-		lg:grid-cols-[1.25rem_1.25rem_3rem_20rem_minmax(18.75rem,_2fr)_8rem]
 	"
 	on:mouseenter={() => (isHoverning = true)}
 	on:mouseleave={() => (isHoverning = false)}
 >
-	<div>
+	<div class="flex h-5 w-5 items-end justify-center self-center">
 		{#if isHoverning}
 			<Drag />
 		{/if}
@@ -47,12 +69,20 @@
 		}}
 		type="checkbox"
 	/>
-	<IconButton on:click={onStarred}><StarOutline class="h-6 w-6" /></IconButton>
-	<div class="overflow-hidden">
-		<span class="whitespace-nowrap">{email.object}</span>
-	</div>
-	<div class="flex overflow-hidden">
-		<span class="whitespace-nowrap">{email.body.slice(0, 50)}...</span>
+	<IconButton on:click={onStarred}>
+		{#if email.tags.includes('starred')}
+			<Star />
+		{:else}
+			<StarOutline />
+		{/if}
+	</IconButton>
+	<div class="flex flex-1 flex-col flex-wrap lg:flex-row">
+		<div class="w-64 overflow-hidden">
+			<span class="whitespace-nowrap font-medium">{email.object}</span>
+		</div>
+		<div class="flex-1 overflow-hidden">
+			<span class="whitespace-nowrap font-light lg:pl-2">{email.body.slice(0, 50)}...</span>
+		</div>
 	</div>
 	<div class="flex justify-end overflow-hidden">
 		<span class="text-sm text-gray-600">{email.date}</span>
