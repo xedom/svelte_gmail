@@ -41,15 +41,15 @@
 		flex
 		flex-row
 		items-baseline
-		border-b-2
-		border-gray-200
+		border-b-[1px]
+		border-gray-300
 		bg-slate-100
 		px-1
 		transition
 		duration-200
 		ease-in-out
 		hover:cursor-pointer
-		hover:bg-blue-200
+		hover:bg-blue-100
 	"
 	on:mouseenter={() => (isHoverning = true)}
 	on:mouseleave={() => (isHoverning = false)}

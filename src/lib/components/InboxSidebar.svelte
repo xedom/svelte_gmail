@@ -30,7 +30,12 @@
 	<div class="flex flex-col gap-1">
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<div class="flex flex-col gap-1 rounded-full" class:bg-blue-200={$page.route.id === '/'}>
+		<div
+			class="flex flex-col gap-1 rounded-full"
+			class:bg-blue-200={$page.route.id === '/'}
+			class:font-semibold={$page.route.id === '/'}
+			class:text-blue-800={$page.route.id === '/'}
+		>
 			<Button
 				on:click={() => {
 					goto('/');
@@ -40,7 +45,12 @@
 			>
 		</div>
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<div class="flex flex-col gap-1 rounded-full" class:bg-blue-200={$page.route.id === '/starred'}>
+		<div
+			class="flex flex-col gap-1 rounded-full"
+			class:bg-blue-200={$page.route.id === '/starred'}
+			class:font-semibold={$page.route.id === '/starred'}
+			class:text-blue-800={$page.route.id === '/starred'}
+		>
 			<Button
 				on:click={() => {
 					goto('/starred');
@@ -50,7 +60,12 @@
 			>
 		</div>
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<div class="flex flex-col gap-1 rounded-full" class:bg-blue-200={$page.route.id === '/sent'}>
+		<div
+			class="flex flex-col gap-1 rounded-full"
+			class:bg-blue-200={$page.route.id === '/sent'}
+			class:font-semibold={$page.route.id === '/sent'}
+			class:text-blue-800={$page.route.id === '/sent'}
+		>
 			<Button
 				on:click={() => {
 					goto('/sent');
@@ -60,7 +75,12 @@
 			>
 		</div>
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<div class="flex flex-col gap-1 rounded-full" class:bg-blue-200={$page.route.id === '/drafts'}>
+		<div
+			class="flex flex-col gap-1 rounded-full"
+			class:bg-blue-200={$page.route.id === '/drafts'}
+			class:font-semibold={$page.route.id === '/drafts'}
+			class:text-blue-800={$page.route.id === '/drafts'}
+		>
 			<Button
 				on:click={() => {
 					goto('/drafts');

@@ -1,28 +1,11 @@
 <script>
-	export let email;
-	// let attachments = [
-	// 	{
-	// 		type: 'pdf',
-	// 		title: 'CV-2023',
-	// 		source: 'https://xed.im/random/AdmirableFreeAfricanjacana-mobile.mp4',
-	// 	},
-	// 	{
-	// 		type: 'mp4',
-	// 		title: 'interview',
-	// 		source: 'https://xed.im/random/rick_roll.mp4',
-	// 	},
-	// ];
+	import AttachmentItem from './AttachmentItem.svelte';
 
-	let attachments = email.attachements.map((a) => ({
-		type: a.split('.')[1],
-		title: a.split('.')[0],
-		source: 'https://xed.im/random/AdmirableFreeAfricanjacana-mobile.mp4',
-	}));
-
-	console.log('email', email);
+	export let email = {};
+	$: attachments = email?.attachments || [];
 </script>
 
-<div class="px-4">
+<div class="overflow-y-auto px-4">
 	<div class="pl-14 font-semibold">{email.object}</div>
 
 	<div class="flex items-start py-2">
@@ -48,18 +31,24 @@
 		blanditiis iure! Reiciendis nesciunt quo voluptate, assumenda ullam quibusdam, dolores quod vel, molestiae at
 		possimus.
 	</div>
+	<div class="pl-14 pt-4">
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque voluptate odio maxime nesciunt, eius non
+		cumque iusto culpa inventore natus, vel amet veniam neque laudantium accusamus alias expedita, commodi harum.
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum doloribus iure, dolorem ab, cupiditate
+		repellendus repudiandae vero aliquid magnam, laudantium tenetur necessitatibus officia quidem eos exercitationem
+		officiis qui dicta dignissimos.
+	</div>
+	<div class="pl-14 pt-4">
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet nobis obcaecati alias debitis assumenda accusamus
+		blanditiis iure! Reiciendis nesciunt quo voluptate, assumenda ullam quibusdam, dolores quod vel, molestiae at
+		possimus.
+	</div>
 	{#if attachments.length !== 0}
 		<hr class="my-6 ml-14" />
 		<div class="ml-14 font-semibold">Attachments</div>
-		<div class="ml-14 mt-2 flex gap-2">
+		<div class="ml-14 mt-2 flex flex-wrap gap-2">
 			{#each attachments as attachment}
-				<a
-					target="_blank"
-					href={attachment.source}
-					class="flex h-32 w-32 items-end rounded-md bg-blue-200 px-3 pb-2"
-				>
-					<div>{attachment.title}.{attachment.type}</div>
-				</a>
+				<AttachmentItem {attachment} />
 			{/each}
 		</div>
 	{/if}

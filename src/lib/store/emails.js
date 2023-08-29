@@ -23,12 +23,13 @@ export const emailStore = writable({
 	starred: [],
 	sent: [],
 	drafts: [],
-	search: "",
+	search: '',
 });
 
 emailStore.subscribe((value) => {
 	if (value.emails.length !== 0) setLocalStorage("emails", value.emails);
 });
+
 
 export const moveOnTop = (id_to_move, id_where_to_move) => {
 	const currentEmails = get(emailStore).emails;
@@ -37,44 +38,7 @@ export const moveOnTop = (id_to_move, id_where_to_move) => {
 	const emailToMove = currentEmails.splice(indexOfEmailToMove, 1)[0];
 	currentEmails.splice(indexOfEmailWhereToMove, 0, emailToMove);
 
-	emailStore.update((store) => ({
-		...store,
-		emails: currentEmails,
-		filtered: currentEmails.filter(e => e.tags.includes('inbox')||e.tags.includes('starred')),
-		starred: currentEmails.filter(e => e.tags.includes('starred')),
-		sent: currentEmails.filter(e => e.tags.includes('sent')),
-		drafts: currentEmails.filter(e => e.tags.includes('draft')),
-	}));
-}
-
-export const addDraftEmail = (object, body, attachements = []) => {
-	const email = {
-		id: Math.random().toString(36).substr(2, 9),
-    object, body,
-    tags: ["draft"],
-    timestamp: dayjs().valueOf(),
-		attachements,
-    date: parseDate(dayjs()),
-  };
-	console.log(email);
-	emailStore.update((store) => ({
-		...store,
-		emails: [...store.emails, email],
-		drafts: store.emails.filter(e => e.tags.includes('draft')),
-	}));
-	return email;
-}
-
-export const bulkDelete = (ids) => {
-	emailStore.update((store) => {
-		const newEmails = store.emails.filter((email) => !ids.includes(email.id));
-		store.emails = newEmails;
-		store.filtered = newEmails.filter(e => e.tags.includes('inbox')||e.tags.includes('starred'));
-		store.starred = newEmails.filter(e => e.tags.includes('starred'));
-		store.sent = newEmails.filter(e => e.tags.includes('sent'));
-		store.drafts = newEmails.filter(e => e.tags.includes('draft'));
-		return store;
-	});
+	setEmails(currentEmails);
 }
 
 export const addStarredEmail = (id) => {
@@ -107,73 +71,73 @@ export const removeStarredEmail = (id) => {
 	}));
 }
 
-export const addSentEmail = (object, body, attachements = []) => {
+export const addSentEmail = (object, body, attachments = []) => {
 	const email = {
 		id: Math.random().toString(36).substr(2, 9),
     object, body,
     tags: ["sent"],
 		timestamp: dayjs().valueOf(),
-		attachements,
+		attachments,
     date: parseDate(dayjs()),
   };
+	addEmails([email]);
+	return email;
+}
 
-	emailStore.update((store) => ({
-		...store, 
-		emails: [...store.emails, email],
-		sent: store.emails.filter(e => e.tags.includes('sent')),
-	}));
+export const addDraftEmail = (object, body, attachments = []) => {
+	const email = {
+		id: Math.random().toString(36).substr(2, 9),
+    object, body,
+    tags: ["draft"],
+    timestamp: dayjs().valueOf(),
+		attachments,
+    date: parseDate(dayjs()),
+  };
+	addEmails([email]);
 	return email;
 }
 
 export const setEmails = (emails) => {
-	emailStore.update((store) => { 
-		const newEmails = [...emails];
-		store.emails = newEmails
-		store.filtered = newEmails.filter(e => e.tags.includes('inbox')||e.tags.includes('starred'));
-		store.starred = emails.filter(e => e.tags.includes('starred'));
-		store.sent = emails.filter(e => e.tags.includes('sent'));
-		store.drafts = emails.filter(e => e.tags.includes('draft'));
-		return store
+	emailStore.update((store) => {
+		return {
+			...store, emails,
+			filtered: emails.filter(e => e.tags.includes('inbox')||e.tags.includes('starred')),
+			starred: emails.filter(e => e.tags.includes('starred')),
+			sent: emails.filter(e => e.tags.includes('sent')),
+			drafts: emails.filter(e => e.tags.includes('draft')),
+		}
 	});
 }
 
-export const addEmails = (emails) => {
+export const addEmails = (newEmails) => {
 	emailStore.update((store) => {
-		const newEmails = [...store.emails, ...emails];
-		store.emails = newEmails;
-		store.filtered = newEmails.filter(e => e.tags.includes('inbox')||e.tags.includes('starred'));
-		store.starred = emails.filter(e => e.tags.includes('starred'));
-		store.sent = emails.filter(e => e.tags.includes('sent'));
-		store.drafts = emails.filter(e => e.tags.includes('draft'));
-		return store
+		const emails = [...store.emails, ...newEmails];
+		return {
+			...store, emails,
+			filtered: emails.filter(e => e.tags.includes('inbox')||e.tags.includes('starred')),
+			starred: emails.filter(e => e.tags.includes('starred')),
+			sent: emails.filter(e => e.tags.includes('sent')),
+			drafts: emails.filter(e => e.tags.includes('draft')),
+		}
 	});
 }
 
-export const deleteEmail = (id) => {
+export const deleteEmails = (ids) => {
 	emailStore.update((store) => {
-		store.emails = store.emails.filter((email) => email.id !== id)
+		const emails = store.emails.filter((e) => !ids.includes(e.id));
+		return {
+			...store, emails,
+			filtered: emails.filter(e => e.tags.includes('inbox')||e.tags.includes('starred')),
+			starred: emails.filter(e => e.tags.includes('starred')),
+			sent: emails.filter(e => e.tags.includes('sent')),
+			drafts: emails.filter(e => e.tags.includes('draft')),
+		}
 	});
 }
 
 export const handleSearch = (data) => {
-	const filtered = data.emails.filter(email => 
-		email.object.toLowerCase().includes(data.search.toLowerCase())
+	const filtered = data.emails.filter(e => 
+		e.object.toLowerCase().includes(data.search.toLowerCase())
 	);
 	data.filtered = filtered.filter(e => e.tags.includes('inbox')||e.tags.includes('starred'));
-}
-
-export const getInboxEmails = () => {
-	return get(emailStore).emails.filter(e => e.tags.includes('inbox')||e.tags.includes('starred'));
-}
-
-export const getStarredEmails = () => {
-	return get(emailStore).emails.filter(e => e.tags.includes('starred'));
-}
-
-export const getSentEmails = () => {
-	return get(emailStore).emails.filter(e => e.tags.includes('sent'));
-}
-
-export const getDraftsEmails = () => {
-	return get(emailStore).emails.filter(e => e.tags.includes('draft'));
 }

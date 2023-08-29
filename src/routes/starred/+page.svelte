@@ -1,5 +1,5 @@
 <script>
-	import { emailStore, addStarredEmail, removeStarredEmail, bulkDelete, getInboxEmails } from '$lib/store/emails';
+	import { emailStore, addStarredEmail, removeStarredEmail, deleteEmails } from '$lib/store/emails';
 	import InboxEmails from '$lib/components/InboxEmails.svelte';
 	import InboxToolbar from '$lib/components/InboxToolbar.svelte';
 
@@ -10,7 +10,7 @@
 	const onDeselect = (id) => (selectedEmails = selectedEmails.filter((emailId) => emailId != id));
 
 	const onBulkDelete = () => {
-		bulkDelete(selectedEmails);
+		deleteEmails(selectedEmails);
 		selectedEmails = [];
 	};
 
